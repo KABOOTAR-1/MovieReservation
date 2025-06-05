@@ -1,7 +1,7 @@
 const { SeatLock } = require("../models/seatLock");
 
 class SeatLockProvider {
-    constructor(lockTimeout = 600000) { // 10 minutes default
+    constructor(lockTimeout = 600000) {
         this.lockTimeout = lockTimeout;
     }
 

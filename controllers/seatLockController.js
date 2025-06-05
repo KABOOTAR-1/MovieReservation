@@ -1,8 +1,6 @@
-const SeatLockProvider = require('../services/seatLockProvider');
 const showService = require('../services/showService');
+const { seatLockProvider } = require('../services/container');
 const User = require('../models/user');
-
-const seatLockProvider = new SeatLockProvider(600000); // 5 minutes timeout
 
 class SeatLockController {
     async lockSeats(req, res) {
@@ -53,6 +51,5 @@ class SeatLockController {
 }
 
 module.exports = {
-    controller: new SeatLockController(),
-    seatLockProvider
+    controller: new SeatLockController()
 };

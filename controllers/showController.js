@@ -2,12 +2,8 @@ const SeatAvailabilityService = require('../services/seatAvailabilityService');
 const showService = require('../services/showService');
 const theatreService = require('../services/theatreService');
 const movieService = require('../services/movieService');
-const BookingService = require('../services/bookingService');
-const SeatLockProvider = require('../services/seatLockProvider');
+const { bookingService, seatLockProvider } = require('../services/container');
 
-// Initialize dependencies
-const seatLockProvider = new SeatLockProvider(600000); // 5 minutes timeout
-const bookingService = new BookingService(seatLockProvider);
 const seatAvailabilityService = new SeatAvailabilityService(bookingService, seatLockProvider);
 
 async function createShow(req, res) {

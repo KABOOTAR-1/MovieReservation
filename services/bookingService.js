@@ -17,7 +17,6 @@ class BookingService {
   }
 
   async createBooking(user, show, seats) {
-    console.log("This is the uer object: ", user, show, seats);
     if (await this.isAnySeatAlreadyBooked(show, seats)) {
       throw new Error("Seat Already Booked");
     }
@@ -58,9 +57,7 @@ class BookingService {
     }
 
     for (const seat of booking.seatsBooked) {
-      if (
-        !(await this.seatLockProvider.validateLock(booking.show, seat, user))
-      ) {
+      if (!(await this.seatLockProvider.validateLock(booking.show, seat, user))) {
         throw new Error("Acquired Lock is either invalid or has Expired");
       }
     }
@@ -71,7 +68,6 @@ class BookingService {
 
   async isAnySeatAlreadyBooked(show, seats) {
     const bookedSeats = await this.getBookedSeats(show);
-    console.log("Booked Seats: ", bookedSeats);
     return seats.some((seat) =>
       bookedSeats.some(
         (bookedSeat) => bookedSeat._id.toString() === seat._id.toString()
